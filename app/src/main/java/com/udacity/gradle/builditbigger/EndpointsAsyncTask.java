@@ -19,7 +19,7 @@ import in.ishankhanna.jokedroid.ShowAJokeActivity;
 class EndpointsAsyncTask extends AsyncTask<Pair<Context, String>, Void, String> {
     private static MyApi myApiService = null;
     private Context context;
-
+    private boolean jokeFetchedSuccessfully = false;
     @Override
     protected String doInBackground(Pair<Context, String>... params) {
         if(myApiService == null) {  // Only do this once
@@ -57,9 +57,17 @@ class EndpointsAsyncTask extends AsyncTask<Pair<Context, String>, Void, String> 
     @Override
     protected void onPostExecute(String result) {
 
-        Intent intent = new Intent(context, ShowAJokeActivity.class);
-        intent.putExtra("joke", result);
-        context.startActivity(intent);
+        if (result != null && !result.isEmpty()) {
+            jokeFetchedSuccessfully = true;
+            Intent intent = new Intent(context, ShowAJokeActivity.class);
+            intent.putExtra("joke", result);
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            context.startActivity(intent);
+        }
 
+    }
+
+    public boolean isJokeFetchedSuccessfully() {
+        return jokeFetchedSuccessfully;
     }
 }
