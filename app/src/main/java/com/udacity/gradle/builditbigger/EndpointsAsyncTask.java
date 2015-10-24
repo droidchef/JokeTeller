@@ -1,15 +1,17 @@
 package com.udacity.gradle.builditbigger;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.util.Pair;
-import android.widget.Toast;
 
 import com.example.ishan.myapplication.backend.myApi.MyApi;
 import com.google.api.client.extensions.android.http.AndroidHttp;
 import com.google.api.client.extensions.android.json.AndroidJsonFactory;
 
 import java.io.IOException;
+
+import in.ishankhanna.jokedroid.ShowAJokeActivity;
 
 /**
  * @author Ishan Khanna
@@ -54,6 +56,10 @@ class EndpointsAsyncTask extends AsyncTask<Pair<Context, String>, Void, String> 
 
     @Override
     protected void onPostExecute(String result) {
-        Toast.makeText(context, result, Toast.LENGTH_LONG).show();
+
+        Intent intent = new Intent(context, ShowAJokeActivity.class);
+        intent.putExtra("joke", result);
+        context.startActivity(intent);
+
     }
 }
