@@ -1,29 +1,27 @@
-package com.udacity.gradle.builditbigger;
+package in.ishankhanna.jokedroid;
 
-import android.content.Intent;
+import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
+import android.widget.TextView;
 
-import in.ishankhanna.Joker;
-import in.ishankhanna.jokedroid.ShowAJokeActivity;
-
-
-public class MainActivity extends ActionBarActivity {
+public class ShowAJokeActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-    }
+        setContentView(R.layout.activity_show_ajoke);
 
+        TextView tv = (TextView) findViewById(R.id.jokeText);
+
+        tv.setText(getIntent().getStringExtra("joke"));
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
+        getMenuInflater().inflate(R.menu.menu_show_ajoke, menu);
         return true;
     }
 
@@ -41,13 +39,4 @@ public class MainActivity extends ActionBarActivity {
 
         return super.onOptionsItemSelected(item);
     }
-
-    public void tellJoke(View view){
-
-        Intent intent = new Intent(MainActivity.this, ShowAJokeActivity.class);
-        intent.putExtra("joke", new Joker().getJoke());
-        startActivity(intent);
-    }
-
-
 }
