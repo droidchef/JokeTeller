@@ -1,14 +1,12 @@
 package com.udacity.gradle.builditbigger;
 
-import android.content.Intent;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
+import android.util.Pair;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-
-import in.ishankhanna.Joker;
-import in.ishankhanna.jokedroid.ShowAJokeActivity;
 
 
 public class MainActivity extends ActionBarActivity {
@@ -17,6 +15,7 @@ public class MainActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
     }
 
 
@@ -44,9 +43,12 @@ public class MainActivity extends ActionBarActivity {
 
     public void tellJoke(View view){
 
-        Intent intent = new Intent(MainActivity.this, ShowAJokeActivity.class);
-        intent.putExtra("joke", new Joker().getJoke());
-        startActivity(intent);
+        new EndpointsAsyncTask().execute(new Pair<Context, String>(this, "This is nice a joke"));
+
+
+//        Intent intent = new Intent(MainActivity.this, ShowAJokeActivity.class);
+//        intent.putExtra("joke", new Joker().getJoke());
+//        startActivity(intent);
     }
 
 
