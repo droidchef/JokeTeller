@@ -20,12 +20,8 @@ android {
     }
 
     productFlavors {
-        paid {
-            minSdkVersion 10
-            applicationId 'com.udacity.gradle.builditbigger.paid'
-            targetSdkVersion 22
-            versionCode 1
-            versionName '1.0'
+        free {
+            applicationId 'com.udacity.gradle.builditbigger.free'
         }
     }
 }
@@ -35,7 +31,7 @@ dependencies {
     // Added for AdMob
     compile project(':jokedroid')
     compile 'com.android.support:appcompat-v7:22.1.1'
-    compile 'com.google.android.gms:play-services:8.1.0'
+    freeCompile 'com.google.android.gms:play-services:8.1.0'
     compile project(path: ':backend', configuration: 'android-endpoints')
     compile 'com.android.support:multidex:1.0.0'
 }
